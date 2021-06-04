@@ -1,0 +1,32 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/user-list">Gestion des utilisateurs</a></li>
+  <li class="active">Historique des mots de passe</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card profile-card">
+      <br>
+      <div class="profile-body" *ngIf="user" >
+        <div class="content-area">
+          <h4>Nom: {{user.name}}</h4>
+          <p *ngIf="user.direction">Direction: {{user.direction}}</p>
+          <p>Role: {{user.role.name}}</p>
+        </div>
+      </div>
+      <div class="profile-footer">
+        <ul>
+          <li>
+            <span>Mot de passe</span>
+            <span><b>Date de modification</b></span>
+          </li>
+          <li *ngFor="let h of history" >
+            <span>{{h.password}}</span>
+            <span>{{h.entryDate | date:'dd/MM/yyyy hh:mm'}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

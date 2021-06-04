@@ -1,0 +1,139 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/proposition-list">Gestion des propositions</a></li>
+  <li class="active" *ngIf="!addForm.get('id')!.value">Ajouter une proposition</li>
+  <li class="active" *ngIf="addForm.get('id')!.value">Modifier une proposition</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <br>
+        <form name="form" role="form" (ngSubmit)="addProposition()" [formGroup]="addForm">
+          <!-- <h2 class="card-inside-title">With Icon</h2> -->
+          <div class="alert alert-warning" *ngIf="numeroExiste">
+            Le numéro existe déja.
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-3">
+              <b>Numéro de proposition</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="number" class="form-control date" placeholder="Numéro"
+                    formControlName="propositionNumber">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Fournisseur</b>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">local_shipping</i>
+                </span>
+                <div class="form-line">
+                  <select class="form-control " formControlName="supplier">
+                    <option *ngFor="let supplier of suppliersList" [ngValue]="supplier.supplierId">
+                      {{supplier.supplierCode}} - {{supplier.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Produit</b>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">shopping_basket</i>
+                </span>
+                <div class="form-line">
+                  <select class="form-control " formControlName="product">
+                    <option *ngFor="let product of productsList" [ngValue]="product.productId">
+                      {{product.productCode}} - {{product.productName}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Direction</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Direction" formControlName="direction">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Date de fin</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="date" class="form-control" placeholder="Date de fin" formControlName="endDate">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Montant TTC</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="number" class="form-control" placeholder="Montant TTC" formControlName="amountTTC">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Montant HT</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="number" class="form-control" placeholder="Montant HT" formControlName="amountHT">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <b>Quantité</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="number" class="form-control" placeholder="Quantité" formControlName="quantity">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row clearfix" *ngIf="!addForm.get('id')!.value">
+            <div class="col-md-12">
+              <div class="form-group">
+                <b>Devis</b>
+                <div class="input-group">
+                  <div class="form-line">
+                    <input type="file" id="file" formControlName="devis" class="form-control" accept=".pdf,.doc,.docx" (change)="handleFileInput($event.target.files)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <div class="input-group">
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="!addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving" (click)="addProposition()">Ajouter
+                </button>
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving" (click)="updateProposition()">Modifier
+                </button>
+                <button type="button" class="btn bg-grey m-t-15 waves-effect" (click)="previousState()">Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

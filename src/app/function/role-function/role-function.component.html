@@ -1,0 +1,24 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/function-list">Gestion des Fonctions</a></li>
+  <li class="active">Détails du fonction</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 *ngIf="functionModel">
+      {{functionModel.name}}
+      <small>{{functionModel.description}}</small>
+    </h2>
+  </div>
+  <div class="body">
+    <div class="list-group">
+      <ul class="list-group" *ngIf="roleModel" >
+        <span *ngIf="roleModel">
+          <li class="list-group-item" *ngFor="let role of roleModel">
+            {{role}}
+          </li>
+        </span>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/user-list">Gestion des utilisateurs</a></li>
+  <li class="active" *ngIf="!addForm.get('id')!.value">Ajouter un utilisateur</li>
+  <li class="active" *ngIf="addForm.get('id')!.value">Modifier un utilisateur</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <br>
+        <form name="form" role="form" (ngSubmit)="addUser()" [formGroup]="addForm">
+          <!-- <h2 class="card-inside-title">With Icon</h2> -->
+          <div class="alert alert-warning" *ngIf="loginExiste">
+            Le nom d'utilisateur existe déja.
+          </div>
+          <div class="alert alert-warning" *ngIf="emailExiste">
+            L'email existe déja.
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">person</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Nom" formControlName="name" required>
+                </div>
+                <div
+                  *ngIf="addForm.get('name')!.invalid && (addForm.get('name')!.dirty || addForm.get('name')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('name')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">email</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control email" placeholder="E-mail" formControlName="email" required>
+                </div>
+                <div
+                  *ngIf="addForm.get('email')!.invalid && (addForm.get('email')!.dirty || addForm.get('email')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('email')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                  <small class="form-text text-danger"
+                    *ngIf="addForm.get('email')?.errors?.email || addForm.get('email')?.errors?.pattern">
+                    Votre adresse email est invalide.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">person</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Nom d'utilisateur" formControlName="login" required>
+                </div>
+                <div
+                  *ngIf="addForm.get('login')!.invalid && (addForm.get('login')!.dirty || addForm.get('login')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('login')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3" *ngIf="!addForm.get('id')!.value">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">lock</i>
+                </span>
+                <div class="form-line">
+                  <input type="password" class="form-control date" placeholder="Mot de passe" formControlName="password">
+                </div>
+                <div
+                  *ngIf="addForm.get('password')!.invalid && (addForm.get('password')!.dirty || addForm.get('password')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('password')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">format_color_text</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Description" formControlName="description">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">business</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Direction" formControlName="direction">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">contacts</i>
+                </span>
+                <div class="form-line">
+                  <select class="form-control" ([ngModel])="user.role" formControlName="role">
+                    <option *ngFor="let r of roles" [value]="r.roleId">
+                      {{r.name}}
+                    </option>
+                  </select>
+                </div>
+                <div
+                  *ngIf="addForm.get('role')!.invalid && (addForm.get('role')!.dirty || addForm.get('role')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('role')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="input-group">
+                <input type="checkbox" id="basic_checkbox_1" formControlName="userStatus">
+                <label for="basic_checkbox_1">Active</label>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <div class="input-group">
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="!addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving" (click)="addUser()">Ajouter
+                </button>
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving" (click)="updateUser()">Modifier
+                </button>
+                <button type="button" class="btn bg-grey m-t-15 waves-effect" (click)="previousState()">Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

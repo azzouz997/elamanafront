@@ -1,0 +1,113 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/orders-list">Gestion des Commandes</a></li>
+  <li class="active">Modifier commande</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <br>
+        <form name="form" role="form">
+          <!-- (ngSubmit)="addRole()" [formGroup]="addForm" -->
+          <!-- <h2 class="card-inside-title">With Icon</h2> -->
+          <div class="row clearfix">
+            <!-- <div class="col-md-6">
+              <b>Numéro de commande</b>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Numéro de commande" required>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="col-md-4">
+              <b>Fournisseurs</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control ">
+                    <option>
+                      fournisseur
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <b>Produits</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control ">
+                    <option>
+                      produit
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <b>Quantité</b>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Quantité">
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-6">
+              <b>Etat</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control ">
+                    <option>
+                      état
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+          <!-- <div class="row clearfix">
+
+            </div>
+
+            <div class="col-md-6">
+              <b>Proposition</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control ">
+                    <option>
+                      proposition
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <div class="input-group">
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right">Modifier
+                  <!-- [disabled]="addForm.invalid || isSaving" (click)="addRole()" -->
+                </button>
+                <button type="button" class="btn bg-grey m-t-15 waves-effect" (click)="previousState()">Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

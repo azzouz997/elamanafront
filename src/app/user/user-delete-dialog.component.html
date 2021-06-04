@@ -1,0 +1,12 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Supprimer un utilisateur</h4>
+  </div>
+  <div class="modal-body">
+    Êtes-vous sûr de vouloir supprimer: "{{user.name}}"?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger waves-effect" (click)="confirmDelete(user.userId)">Supprimer</button>
+    <button type="button" class="btn bg-grey waves-effect" data-dismiss="modal" (click)="clear()">Annuler</button>
+  </div>
+</div>

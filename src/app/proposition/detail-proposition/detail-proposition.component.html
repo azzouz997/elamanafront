@@ -1,0 +1,75 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Détails de proposition</h4>
+  </div>
+  <div class="modal-body" id="print-section">
+    <ul class="list-group" *ngIf="proposition" >
+      <li class="list-group-item clearfix">
+        Numéro de proposition
+        <p class="pull-right">{{proposition.propositionNumber}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Produit
+        <p class="pull-right">{{proposition.product.productName}} - {{proposition.product.productCode}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Fournisseur
+        <p class="pull-right">{{proposition.supplierName}} - {{proposition.supplierCode}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Direction
+        <p class="pull-right">{{proposition.direction}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Quantité
+        <p class="pull-right">{{proposition.quantity}} piéce</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Montant TTC
+        <p class="pull-right">{{proposition.amountTTC}} DT</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Montant HT
+        <p class="pull-right">{{proposition.amountHT}} DT</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Durée
+        <p class="pull-right">{{proposition.startDate | date: 'dd/MM/yyyy hh:mm'}} - {{proposition.endDate| date:
+          'dd/MM/yyyy hh:mm'}}</p>
+      </li>
+      <li class="list-group-item clearfix list-group-item-success" *ngIf="proposition.propositionStatus">
+        Etat de proposition
+        <p class="pull-right">Validé</p>
+      </li>
+      <li class="list-group-item clearfix list-group-item-warning" *ngIf="!proposition.propositionStatus">
+        Etat de proposition
+        <p class="pull-right"> Non validé</p>
+      </li>
+      <li class="list-group-item clearfix" *ngIf="proposition.propositionStatus">
+        Validé le: <b>{{proposition.validationDate | date: 'dd/MM/yyyy hh:mm'}}, </b>
+        <p class="pull-right">Par: <b *ngIf="proposition.validatorId" >{{proposition.validator.name}}</b></p>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer clearfix">
+    <ul class="list-group">
+      <li class="list-group-item clearfix">
+        <button type="button" class="btn btn-primary waves-effect btn-lg" data-dismiss="modal"
+          (click)="print()">Print</button>
+        <button type="button" class="btn btn-success waves-effect btn-lg" data-dismiss="modal"
+          (click)="valider()" *ngIf="!proposition.propositionStatus" >Valider</button>
+        <button type="button" class="btn bg-grey waves-effect pull-right btn-lg" data-dismiss="modal"
+          (click)="clear()">Retour</button>
+      </li>
+    </ul>
+  </div>
+</div>

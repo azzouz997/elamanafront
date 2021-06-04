@@ -1,0 +1,27 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/role-list">Gestion des Roles</a></li>
+  <li class="active">Détails de role</li>
+</ol>
+<div class="card">
+  <div class="header">
+    <h2 *ngIf="roleModel" >
+      {{roleModel.name}}
+      <small>{{roleModel.description}}</small>
+    </h2>
+  </div>
+  <div class="body">
+    <div class="list-group">
+      <ul class="list-group" *ngIf="functions" >
+        <span *ngIf="functions.length === 0">
+          Pas de fonction est affecté à ce role.
+        </span>
+        <span *ngIf="functions.length > 0">
+          <li class="list-group-item" *ngFor="let f of functions">
+            {{f.name}}
+          </li>
+        </span>
+      </ul>
+    </div>
+  </div>
+</div>

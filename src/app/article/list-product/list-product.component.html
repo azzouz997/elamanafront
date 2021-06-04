@@ -1,0 +1,80 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li class="active">Gestion des Produits</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <div class="table-responsive">
+          <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div id="DataTables_Table_1_filter" class="dataTables_filter">
+              <label>Recherche:
+                <input type="search" class="form-control input-sm" placeholder="" aria-controls="DataTables_Table_1"
+                  name="search" [(ngModel)]="searchText">
+              </label>
+              <button type="button" (click)="addProduct()"
+                class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float pull-right">
+                <i class="material-icons">add</i>
+              </button>
+            </div>
+            <br>
+            <table class="table table-bordered table-striped table-hover dataTable js-exportable"
+              id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+              <thead>
+                <tr role="row">
+                  <th style="width: 141.75px;">Code produit <i class="material-icons pull-right" (click)="sortFunction('productCode', booleanValue)">sort</i></th>
+                  <th style="width: 141.75px;">Nom produit <i class="material-icons pull-right" (click)="sortFunction('productName', booleanValue)">sort</i></th>
+                  <th style="width: 141.75px;">Fournisseur <i class="material-icons pull-right" (click)="sortFunction('supplierName', booleanValue)">sort</i></th>
+                  <th style="width: 141.75px;">Disponible</th>
+                  <th class="text-center"style="width: 229.75px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" *ngFor="let product of products
+                  | paginate: { itemsPerPage: 10, currentPage: p, totalItems: products.length }
+                  | productFilter: searchText;">
+                  <td class="sorting_1">{{product.productCode}}</td>
+                  <td class="sorting_1">{{product.productName}}</td>
+                  <td class="sorting_1">{{product.supplierName}}</td>
+                  <td class="sorting_1" *ngIf="product.quantityInStock > 0">Oui</td>
+                  <td class="sorting_1" *ngIf="product.quantityInStock === 0">Non</td>
+                  <!-- <td class="sorting_1" *ngIf="product.status">Oui</td>
+                  <td class="sorting_1" *ngIf="!product.status">Non</td> -->
+                  <td class="text-center">
+                    <button type="button" class="btn bg-indigo waves-effect" (click)="infoProduct(product)">Plus
+                      d'info</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn bg-blue waves-effect"
+                      [routerLink]="['/product-historique', product.productId]">
+                      <span>Historique</span>
+                    </button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-success waves-effect"
+                      [routerLink]="['/product-edit', product.productId]" queryParamsHandling="merge">
+                      <span>Modifier</span>
+                    </button>
+                    <!-- &nbsp;&nbsp;
+                    <button type="button" class="btn bg-red waves-effect">
+                      <span>Supprimer</span>
+                    </button> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="products?.length > 0">
+          <div class="text-center">
+            <div class="d-inline-flex border-radius-fl-item mt-4 mb-0 pagination">
+              <div class="row justify-content-center">
+                <pagination-controls (pageChange)="p = $event" nextLabel="" previousLabel=""></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

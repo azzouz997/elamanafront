@@ -1,0 +1,36 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Modifier le devis</h4>
+  </div>
+  <div class="modal-body" id="print-section">
+    <p>Numéro de proposition: <b>{{proposition.propositionNumber}}</b></p>
+    <form name="form" role="form" [formGroup]="editForm">
+    <hr>
+    <div class="row clearfix col-md-12">
+      <div class="form-group">
+        <b>Devis</b>
+        <div class="input-group">
+          <div class="form-line">
+            <input type="file" id="file" formControlName="devis" class="form-control" accept=".pdf,.doc,.docx"
+              (change)="handleFileInput($event.target.files)">
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="modal-footer clearfix">
+    <button type="button" class="btn btn-success waves-effect btn-lg" data-dismiss="modal"
+      (click)="valider()" [disabled]="editForm.invalid || isSaving">Modifier</button>
+    <button type="button" class="btn bg-grey waves-effect pull-right btn-lg" data-dismiss="modal"
+      (click)="clear()">Retour</button>
+  </div>
+</div>

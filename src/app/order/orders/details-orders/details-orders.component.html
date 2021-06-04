@@ -1,0 +1,68 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Détails de commande</h4>
+  </div>
+  <div class="modal-body">
+    <form name="form" role="form" [formGroup]="editForm">
+      <ul class="list-group">
+        <li class="list-group-item clearfix">
+          Numéro de commande
+          <p class="pull-right">{{order.orderId}}</p>
+        </li>
+        <li class="list-group-item clearfix">
+          Numéro de proposition
+          <p class="pull-right">{{order.propositionNumber}}</p>
+        </li>
+        <li class="list-group-item clearfix">
+          Fournisseur
+          <p class="pull-right">{{order.supplierName}}</p>
+        </li>
+        <li class="list-group-item clearfix">
+          Produit
+          <p class="pull-right">{{order.productCode}} - {{order.productName}}</p>
+        </li>
+        <li class="list-group-item clearfix">
+          Quantité
+          <p class="pull-right">{{order.quantity}}</p>
+        </li>
+        <li class="list-group-item clearfix">
+          Bon de Commande
+          <p class="pull-right"><a (click)="displayFile(order.orderReceiptId)">Voir</a></p>
+        </li>
+        <li class="list-group-item clearfix">
+          Crée le: <b>{{order.creationStartDate | date: 'dd/MM/yyyy hh:mm'}}, </b>
+          <p class="pull-right">Par: <b>{{order.creatorName}}</b></p>
+        </li>
+        <li class="list-group-item clearfix">
+          Etat: {{order.orderStatus}}
+          <p class="pull-right">
+            <select class="form-control" formControlName="etat">
+              <option value="Non validée">Non validée</option>
+              <option value="Validée">Validée</option>
+              <option value="Livrée">Livrée</option>
+            </select>
+          </p>
+        </li>
+        <li class="list-group-item clearfix" *ngIf="order.validatorId">
+          Validée le: <b>{{order.validationStartDate | date: 'dd/MM/yyyy hh:mm'}}, </b>
+          <p class="pull-right">Par: <b>{{order.validatorName}}</b></p>
+        </li>
+        <li class="list-group-item clearfix" *ngIf="order.validationEndDate">
+          Modifié le le: <b>{{order.validationEndDate | date: 'dd/MM/yyyy hh:mm'}}, </b>
+          <p class="pull-right">Par: <b>{{order.validatorName}}</b></p>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success waves-effect btn-lg" data-dismiss="modal" (click)="valider()"
+      [disabled]="editForm.invalid || isSaving">Modifier</button>
+    <button type="button" class="btn bg-grey waves-effect btn-lg" data-dismiss="modal" (click)="clear()">Retour</button>
+  </div>
+</div>

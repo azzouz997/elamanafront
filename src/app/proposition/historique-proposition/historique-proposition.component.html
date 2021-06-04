@@ -1,0 +1,71 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/proposition-list">Gestion des Propositions</a></li>
+  <li class="active">Historique de proposition</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="header">
+        <div class="row clearfix">
+          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" *ngIf="proposition" >
+            <p class="font-italic col-teal">Numéro de proposition: {{proposition.propositionNumber}}</p>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8 pull-right">
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="DataTables_Table_1"
+          role="grid" aria-describedby="DataTables_Table_1_info">
+          <thead>
+            <tr role="row">
+              <th class="" style="width: 141.75px;">Durée</th>
+              <th class="" style="width: 141.75px;">Etat</th>
+              <th class="" style="width: 141.75px;">Produit</th>
+              <th class="" style="width: 141.75px;">Fournisseur</th>
+              <th class="" style="width: 141.75px;">Montant TTC</th>
+              <th class="" style="width: 141.75px;">Montant HT</th>
+              <th class="" style="width: 141.75px;">Quantité</th>
+              <th class="" style="width: 141.75px;">Direction</th>
+              <th class="" style="width: 141.75px;">Devis</th>
+              <th class="" style="width: 141.75px;">Validateur</th>
+              <th class="" style="width: 141.75px;">Date de validation</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="history">
+            <tr role="row" class="odd" *ngFor="let h of history
+            | paginate: { itemsPerPage: 10, currentPage: p, totalItems: history.length };">
+              <td class="sorting_1">{{h.startDate | date: 'dd/MM/yyyy'}} - {{h.endDate | date: 'dd/MM/yyyy'}}</td>
+              <td class="sorting_1" *ngIf="h.propositionStatus" >Validée</td>
+              <td class="sorting_1" *ngIf="!h.propositionStatus">Non validée</td>
+              <td class="sorting_1">{{h.productName}}</td>
+              <td class="sorting_1">{{h.supplierName}}</td>
+              <td class="sorting_1">{{h.amountTTC}}</td>
+              <td class="sorting_1">{{h.amountHT}}</td>
+              <td class="sorting_1">{{h.quantity}}</td>
+              <td class="sorting_1">{{h.direction}}</td>
+              <td class="sorting_1" *ngIf="h.quoteName" >{{h.quoteName}}</td>
+              <td class="sorting_1" *ngIf="!h.quoteName" >--</td>
+              <td class="sorting_1" *ngIf="h.validatorId" >{{h.validatorName}}</td>
+              <td class="sorting_1" *ngIf="!h.validatorId">--</td>
+              <td class="sorting_1" *ngIf="h.validatorId">{{h.validationDate | date:'dd/MM/yyyy hh:mm'}}</td>
+              <td class="sorting_1" *ngIf="!h.validatorId">--</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <div *ngIf="history?.length > 10">
+          <div class="text-center">
+            <div class="d-inline-flex border-radius-fl-item mt-4 mb-0 pagination">
+              <div class="row justify-content-center">
+                <pagination-controls (pageChange)="p = $event" nextLabel="" previousLabel=""></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

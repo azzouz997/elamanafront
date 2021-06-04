@@ -1,0 +1,74 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li class="active">Mes Commandes</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <div class="table-responsive">
+          <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div id="DataTables_Table_1_filter" class="dataTables_filter">
+              <label>Recherche:
+                <input type="search" class="form-control input-sm" placeholder="" aria-controls="DataTables_Table_1"
+                  name="search" [(ngModel)]="searchText">
+              </label>
+              <button type="button" (click)="addOrder()"
+                class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float pull-right">
+                <i class="material-icons">add_shopping_cart</i>
+              </button>
+            </div>
+            <br>
+            <table class="table table-bordered table-striped table-hover dataTable js-exportable"
+              id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
+              <thead>
+                <tr role="row">
+                  <th style="width: 141.75px;">Commande <i class="material-icons pull-right"
+                    (click)="sortFunction('orderId', booleanValue)">sort</i></th>
+                  <th style="width: 141.75px;">Produit <i class="material-icons pull-right"
+                    (click)="sortFunction('productName', booleanValue)">sort</i></th>
+                  <th style="width: 141.75px;">Quantitié <i class="material-icons pull-right"
+                    (click)="sortFunction('quantity', booleanValue)">sort</i></th>
+                  <th style="width: 141.75px;">Etat</th>
+                  <th style="width: 141.75px;">Bon de commande</th>
+                  <th class="text-center" style="width: 229.75px;">Plus d'information</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr role="row" class="odd" *ngFor="let order of orders
+                  | paginate: { itemsPerPage: 10, currentPage: p, totalItems: orders.length }
+                  | orderFilter: searchText;">
+                  <td class="sorting_1">{{order.orderId}}</td>
+                  <td class="sorting_1">{{order.productName}}</td>
+                  <td class="sorting_1">{{order.quantity}}</td>
+                  <td class="sorting_1">{{order.orderStatus}}</td>
+                  <td class="sorting_1 text-center">
+                    <button type="button" class="btn bg-indigo btn-circle waves-effect waves-circle waves-float"
+                      (click)="displayFile(order.orderReceiptId)">
+                      <i class="material-icons">file_download</i>
+                    </button>
+                  </td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-success waves-effect" (click)="infoOder(order)">
+                      <span>Détails</span>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div *ngIf="orders?.length > 0">
+          <div class="text-center">
+            <div class="d-inline-flex border-radius-fl-item mt-4 mb-0 pagination">
+              <div class="row justify-content-center">
+                <pagination-controls (pageChange)="p = $event" nextLabel="" previousLabel=""></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

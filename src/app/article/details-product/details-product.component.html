@@ -1,0 +1,46 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Détails de produit</h4>
+  </div>
+  <div class="modal-body">
+    <ul class="list-group">
+      <li class="list-group-item clearfix">
+        Libelle
+        <p class="pull-right">{{product.productName}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Code
+        <p class="pull-right">{{product.productCode}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Fournisseur
+        <p class="pull-right">{{product.supplier.name}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Quantité dans le stock
+        <p class="pull-right">{{product.quantityInStock}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Quantité utilisé
+        <p class="pull-right">{{product.quantityUsed}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Dernier date d'achat
+        <p class="pull-right">{{product.lastBuyingDate | date: 'short'}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Dernier de création
+        <p class="pull-right">{{product.lastBuyingDate | date: 'short'}}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn bg-grey waves-effect" data-dismiss="modal" (click)="clear()">Retour</button>
+  </div>
+</div>

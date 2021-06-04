@@ -1,0 +1,10 @@
+<app-navbar *ngIf="currentUser"></app-navbar>
+
+<!-- <section>
+  <app-sidebar *ngIf="currentUser"></app-sidebar>
+</section> -->
+<section class="content">
+  <div class="container-fluid center">
+    <router-outlet></router-outlet>
+  </div>
+</section>

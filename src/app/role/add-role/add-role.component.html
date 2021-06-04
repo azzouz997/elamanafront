@@ -1,0 +1,118 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/role-list">Gestion des Roles</a></li>
+  <li class="active" *ngIf="!addForm.get('id')!.value">Ajouter un Role</li>
+  <li class="active" *ngIf="addForm.get('id')!.value">Modifier un Role</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <br>
+        <form name="form" role="form" (ngSubmit)="addRole()" [formGroup]="addForm">
+          <!-- <h2 class="card-inside-title">With Icon</h2> -->
+          <div class="row clearfix">
+            <div class="col-md-6">
+              <b>Libelle</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Libelle" formControlName="name" required>
+                </div>
+                <div
+                  *ngIf="addForm.get('name')!.invalid && (addForm.get('name')!.dirty || addForm.get('name')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('name')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <b>Description</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Description" formControlName="description">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <b>Fonctions</b>
+              <div class="input-group">
+                <div *ngIf="alreadyExist">
+                  <small class="form-text text-danger">
+                    Cette fonction existe déja dans la liste.
+                  </small>
+                </div>
+                <div class="ms-selectable col-md-6">
+                  <select class="form-control " name="functions" multiple formControlName="functions"> <!-- formControlName="functions" (ngModelChange)="addToList($event)"  -->
+                    <option *ngFor="let f of actifFunctions" [ngValue]="f" (click)="addToList(f)">
+                      {{f.name}}
+                    </option>
+                  </select>
+                </div>
+                <div></div>
+                <div class="ms-selectable col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let f of functionsList">
+                      {{f.name}}
+                      <span class="badge bg-red" (click)="removeFromList(f)">x</span>
+                    </li>
+                  </ul>
+                </div>
+                <div
+                  *ngIf="addForm.get('functions')!.invalid && (addForm.get('functions')!.dirty || addForm.get('functions')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('functions')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-12">
+              <b>Fonctions</b>
+              <br>
+              <div *ngIf="addForm.get('id')!.value">
+                <div class="bootstrap-tagsinput" *ngFor="let function of roleEdit.functions" >
+                  <span class="tag label label-info">
+                    {{function.name}}
+                    <span data-role="remove">
+                    </span>
+                  </span>
+                </div>
+              </div>
+              <br>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control " name="functions" formControlName="functions" multiple ngModel>
+                    <option *ngFor="let f of functions" [ngValue]="f">
+                      {{f.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <div class="input-group">
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="!addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving" (click)="addRole()">Ajouter
+                </button>
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving"
+                  (click)="updateRole()">Modifier
+                </button>
+                <button type="button" class="btn bg-grey m-t-15 waves-effect" (click)="previousState()">Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

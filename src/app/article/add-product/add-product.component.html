@@ -1,0 +1,106 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/product-list">Gestion des Produits</a></li>
+  <li class="active" *ngIf="!addForm.get('id')!.value">Ajouter un produit</li>
+  <li class="active" *ngIf="addForm.get('id')!.value">Modifier un produit</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <br>
+        <form name="form" role="form" (ngSubmit)="addProduct()" [formGroup]="addForm">
+          <!-- <h2 class="card-inside-title">With Icon</h2> -->
+          <div class="row clearfix">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Code produit" formControlName="productCode">
+                </div>
+                <div
+                  *ngIf="addForm.get('productCode')!.invalid && (addForm.get('productCode')!.dirty || addForm.get('productCode')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('productCode')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Nom produit" formControlName="productName">
+                </div>
+                <div
+                  *ngIf="addForm.get('productName')!.invalid && (addForm.get('productName')!.dirty || addForm.get('productName')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('productName')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="number" class="form-control date" placeholder="Quantité" formControlName="quantityInStock">
+                </div>
+                <div
+                  *ngIf="addForm.get('quantityInStock')!.invalid && (addForm.get('quantityInStock')!.dirty || addForm.get('quantityInStock')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('quantityInStock')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">local_shipping</i>
+                </span>
+                <div class="form-line">
+                  <select class="form-control " formControlName="supplier">
+                    <option *ngFor="let supplier of listSuppliers" [ngValue]="supplier.supplierId">
+                      {{supplier.name}}
+                    </option>
+                  </select>
+                </div>
+                <div
+                  *ngIf="addForm.get('supplier')!.invalid && (addForm.get('supplier')!.dirty || addForm.get('supplier')!.touched)">
+                  <small class="form-text text-danger" *ngIf="addForm.get('supplier')?.errors?.required">
+                    Ce champ est obligatoire.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <div class="input-group">
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="!addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving" (click)="addProduct()">Ajouter
+                </button>
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving"
+                  (click)="updateProduct()">Modifier
+                </button>
+                <button type="button" class="btn bg-grey m-t-15 waves-effect" (click)="previousState()">Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

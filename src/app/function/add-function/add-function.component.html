@@ -1,0 +1,120 @@
+<ol class="breadcrumb breadcrumb-bg-grey">
+  <li><a href="/">Accueil</a></li>
+  <li><a href="/function-list">Gestion des Fonctions</a></li>
+  <li class="active" *ngIf="!addForm.get('id')!.value">Ajouter une Fonction</li>
+  <li class="active" *ngIf="addForm.get('id')!.value">Modifier une Fonction</li>
+</ol>
+
+<div class="row clearfix">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="card">
+      <div class="body">
+        <br>
+        <form name="form" role="form" (ngSubmit)="addFunction()" [formGroup]="addForm">
+          <!-- <h2 class="card-inside-title">With Icon</h2> -->
+          <div class="alert alert-warning" *ngIf="nameExiste">
+            Le nom déja existe.
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Nom" formControlName="name" required>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Description" formControlName="description">
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-4">
+              <div class="form-group">
+                <input type="radio" name="functionType" id="role" class="with-gap" formControlName="functionType"
+                  value="role">
+                <label for="male">Role</label>
+                <input type="radio" name="functionType" id="user" class="with-gap" formControlName="functionType"
+                  value="user">
+                <label for="female" class="m-l-20">User</label>
+              </div>
+            </div> -->
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-3">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="material-icons">border_color</i>
+                </span>
+                <div class="form-line">
+                  <input type="text" class="form-control date" placeholder="Route" formControlName="route"
+                    required>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-md-3">
+              <b>Type d'utilisation</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <input type="radio" id="role" class="with-gap" formControlName="functionType" name="functionType"
+                    value="role" (change)="onItemChange($event.target.value)">
+                  <label for="role">Role</label>
+                  <input type="radio" id="user" class="with-gap" formControlName="functionType" name="functionType"
+                    value="user" (change)="onItemChange($event.target.value)">
+                  <label for="user" class="m-l-100">User</label>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="col-md-3" *ngIf="isRole">
+              <b>Roles</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control " formControlName="roles" multiple>
+                    <option *ngFor="let role of rolesList" [ngValue]="role">
+                      {{role.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="col-md-3" *ngIf="isUser">
+              <b>User</b>
+              <div class="input-group">
+                <div class="form-line">
+                  <select class="form-control " formControlName="user">
+                    <option *ngFor="let user of usersList" [ngValue]="user.userId">
+                      {{user.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-12">
+              <div class="input-group">
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="!addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving"
+                  (click)="addFunction()">Ajouter
+                </button>
+                <button type="button" class="btn btn-primary m-t-15 waves-effect pull-right"
+                  *ngIf="addForm.get('id')!.value" [disabled]="addForm.invalid || isSaving"
+                  (click)="updateFunction()">Modifier
+                </button>
+                <button type="button" class="btn bg-grey m-t-15 waves-effect" (click)="previousState()">Annuler
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

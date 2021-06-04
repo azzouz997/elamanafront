@@ -1,0 +1,51 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Détails d'ordre</h4>
+  </div>
+  <div class="modal-body" id="print-section">
+    <ul class="list-group">
+      <li class="list-group-item clearfix">
+        Numéro d'ordre
+        <p class="pull-right">{{order.orderId}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Produit
+        <p class="pull-right">{{order.productName}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Fournisseur
+        <p class="pull-right">{{order.supplierName}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Quantité
+        <p class="pull-right">{{order.quantity}} piéce</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Date de création
+        <p class="pull-right">{{order.creationStartDate | date: 'dd/MM/yyyy hh:mm'}}</p>
+      </li>
+      <li class="list-group-item clearfix">
+        Etat
+        <p class="pull-right">{{order.orderStatus}}</p>
+      </li>
+      <li class="list-group-item clearfix" *ngIf="order.validationStartDate.includes('01/01/0001 00:00:00')" >
+        Validé le
+        <p class="pull-right">{{order.validationStartDate | date: 'dd/MM/yyyy hh:mm'}}</p>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer clearfix">
+    <ul class="list-group">
+      <li class="list-group-item clearfix">
+        <button type="button" class="btn bg-grey waves-effect pull-right btn-lg" data-dismiss="modal"
+          (click)="clear()">Retour</button>
+      </li>
+    </ul>
+  </div>
+</div>
